@@ -6,8 +6,8 @@
     <title>Manual Authentication QB</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,69 +15,143 @@
             margin: 0;
         }
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             width: 400px;
             text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
         }
         h2 {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+            font-size: 22px;
         }
         label {
             display: block;
             text-align: left;
-            margin: 10px 0 5px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
         }
         input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 85%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+            outline: none;
+          margin-bottom:25px
+         
         }
-        .required {
-            color: red;
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
         }
-        .auth-link {
-            word-break: break-all;
-            display: block;
-            margin-top: 10px;
-            font-size: 12px;
+        .auth-button {
+            display: inline-block;
+            margin: 15px 0;
+            padding: 12px 15px;
+            background: #667eea;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .auth-button:hover {
+            background: #4a4a4a;
         }
         button {
-            background-color: green;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             width: 100%;
+            font-size: 16px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
         }
         button:hover {
-            background-color: darkgreen;
+            opacity: 0.9;
+        }
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #28a745;
+            display: none;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Manual Authentication QB</h2>
-    <br>
-    <form action="#" method="POST">
-        <label for="location_id">Location ID <span class="required">*</span></label>
-        <input type="text" id="location_id" name="location_id" required>
+  <h2>🔒 Manual Authentication QB</h2><br>
+    <form id="authForm">
+        <label for="location_id">📍 Location ID</label>
+        <input type="text" id="location_id" name="location_id" placeholder="Enter Location ID" required>
 
-        <label for="code">Enter the Code <span class="required">*</span></label>
-        <input type="text" id="code" name="code" required>
-
-        <a class="auth-link" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20com.intuit.quickbooks.payment%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20com.intuit.quickbooks.payment%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029
+        <label for="code">🔑 Enter the Code</label>
+        <input type="text" id="code" name="code" placeholder="Enter Authentication Code" required>
+        
+        <!-- Styled Authentication Button -->
+        <a class="auth-button" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20com.intuit.quickbooks.payment%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">
+            🔗 Authenticate with QuickBooks
         </a>
-<br>
-        <button type="submit">Submit</button>
+      <br>
+
+        <button type="submit">✅ Submit</button>
+        <p class="message" id="successMessage">🎉 Form submitted successfully!</p>
     </form>
 </div>
+
+<script>
+    document.getElementById('authForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const locationId = document.getElementById('location_id').value;
+        const code = document.getElementById('code').value;
+        const webhookUrl = "https://hook.us1.make.com/slauvmmsnj78cmgya8gv21vg1n6dc1uh";
+
+        const payload = {
+            location_id: locationId,
+            code: code
+        };
+
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('successMessage').style.display = "block";
+                document.getElementById('authForm').reset();
+            } else {
+                alert("❌ Failed to submit the form. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("⚠️ An error occurred. Please check the console for details.");
+        });
+    });
+</script>
 
 </body>
 </html>
