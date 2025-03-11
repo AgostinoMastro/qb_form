@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Authentication QB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .required {
+            color: red;
+        }
+        .auth-link {
+            word-break: break-all;
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Manual Authentication QB</h2>
+    <br>
+    <form action="#" method="POST">
+        <label for="location_id">Location ID <span class="required">*</span></label>
+        <input type="text" id="location_id" name="location_id" required>
+
+        <label for="code">Enter the Code <span class="required">*</span></label>
+        <input type="text" id="code" name="code" required>
+
+        <a class="auth-link" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20com.intuit.quickbooks.payment%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20com.intuit.quickbooks.payment%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029
+        </a>
+<br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
