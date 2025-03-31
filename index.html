@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,7 +54,7 @@
             display: inline-block;
             margin: 15px 0;
             padding: 12px 15px;
-            background: #667eea;
+            background: #2CA01C;
             color: white;
             font-size: 14px;
             font-weight: bold;
@@ -66,7 +66,7 @@
             background: #4a4a4a;
         }
         button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #000000;
             color: white;
             padding: 12px;
             border: none;
@@ -78,7 +78,8 @@
             transition: 0.3s;
         }
         button:hover {
-            opacity: 0.9;
+            background: #4a4a4a;
+            color: white;
         }
         .message {
             margin-top: 15px;
@@ -101,7 +102,13 @@
 <body>
 
 <div class="container">
-  <h2>🔒 Manual Authentication QB</h2><br>
+<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+  <img src="https://storage.googleapis.com/rev-logo-files/eagle%20crest%20logo.png" alt="Eagle Crest Logo" style="height: 50px;">
+  <span style="margin: 0 10px; font-size: 24px;">&lt;&gt;</span>
+  <img src="https://storage.googleapis.com/rev-logo-files/quickbooks-2.svg" alt="QuickBooks Logo" style="height: 50px;">
+</div>
+
+  <h2>ECC to QB Authentication</h2><br>
     <form id="authForm">
         <label for="location_id">📍 Company ID</label>
         <input type="text" id="location_id" name="location_id" placeholder="Enter Location ID" required>
