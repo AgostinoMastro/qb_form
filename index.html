@@ -104,22 +104,27 @@
           margin-left: 5px;
         }
         
+        /* Center the popup on screen */
         .info-popup {
           display: none;
-          position: absolute;
-          top: 20px;
-          left: 0;
+          position: fixed; /* so it’s pinned to the viewport */
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           width: 1000px;
           border: 1px solid #ddd;
           background: #fff;
           padding: 10px;
-          z-index: 100;
+          z-index: 9999;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .info-icon:hover .info-popup {
+        /* Show the popup on hover. Also allow staying open when hovering the popup itself. */
+        .info-icon:hover .info-popup,
+        .info-popup:hover {
           display: block;
         }
+
 
 
     </style>
@@ -145,7 +150,18 @@
         </label>
         <input type="text" id="location_id" name="location_id" placeholder="Enter Location ID" required>
 
-        <label for="code">🔑 Enter the Code</label>
+        <label for="code">
+          🔑 Enter the Code 
+          <span class="info-icon">ℹ️
+            <div class="info-popup">
+              <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                <iframe src="https://www.loom.com/embed/6c0169c7490745cd89272240ea705ad3?sid=afc3a1bf-3e7b-427f-877a-2b8410d745f9" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+              </div>
+            </div>
+          </span>
+        </label>
+
+
         <input type="text" id="code" name="code" placeholder="Enter Authentication Code" required>
         
         <!-- Styled Authentication Button -->
