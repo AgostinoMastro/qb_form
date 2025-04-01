@@ -137,76 +137,13 @@
   <span style="margin: 0 10px; font-size: 24px;">&lt;&gt;</span>
   <img src="https://storage.googleapis.com/rev-logo-files/quickbooks-2.svg" alt="QuickBooks Logo" style="height: 50px;">
 </div>
-
-  <h2>ECC to QB Authentication</h2><br>
-    <form id="authForm">
-        <label for="location_id">
-          📍 Company ID 
-          <span class="info-icon">ℹ️
-            <div class="info-popup">
-              <img src="https://storage.cloud.google.com/rev-other-images/ECC%20-%20QB%20Company%20ID%20location.png" alt="Company ID Info" style="width:1000px;">
-            </div>
-          </span>
-        </label>
-        <input type="text" id="location_id" name="location_id" placeholder="Enter Location ID" required>
-
-        <label for="code">
-          🔑 Enter the Code 
-          <span class="info-icon">ℹ️
-            <div class="info-popup">
-              <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                <iframe src="https://www.loom.com" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-              </div>
-            </div>
-          </span>
-        </label>
-
-
-        <input type="text" id="code" name="code" placeholder="Enter Authentication Code" required>
-        
+<hr>
         <!-- Styled Authentication Button -->
-        <a class="auth-button" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20openid%20email%20profile&redirect_uri=https://www.integromat.com/oauth/cb/quickbooks&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">
+        <a class="auth-button" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20openid%20email%20profile&redirect_uri=https://hook.us1.make.com/slauvmmsnj78cmgya8gv21vg1n6dc1uh&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">
             🔗 Authenticate with QuickBooks
         </a>
-      <br>
 
-        <button type="submit">✅ Submit</button>
-        <p class="message" id="successMessage">🎉 Form submitted successfully!</p>
-    </form>
 </div>
-
-<script>
-    document.getElementById('authForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const locationId = document.getElementById('location_id').value;
-        const code = document.getElementById('code').value;
-        const webhookUrl = "https://hook.us1.make.com/slauvmmsnj78cmgya8gv21vg1n6dc1uh";
-
-        const payload = {
-            location_id: locationId,
-            code: code
-        };
-
-        fetch(webhookUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById('successMessage').style.display = "block";
-                document.getElementById('authForm').reset();
-            } else {
-                alert("❌ Failed to submit the form. Please try again.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("⚠️ An error occurred. Please check the console for details.");
-        });
-    });
-</script>
 
 </body>
 </html>
