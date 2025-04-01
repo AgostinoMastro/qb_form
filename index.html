@@ -97,6 +97,31 @@
                 transform: translateY(0);
             }
         }
+        .info-icon {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          margin-left: 5px;
+        }
+        
+        .info-popup {
+          display: none;
+          position: absolute;
+          top: 20px;
+          left: 0;
+          width: 1000px;
+          border: 1px solid #ddd;
+          background: #fff;
+          padding: 10px;
+          z-index: 100;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-icon:hover .info-popup {
+          display: block;
+        }
+
+
     </style>
 </head>
 <body>
@@ -110,7 +135,14 @@
 
   <h2>ECC to QB Authentication</h2><br>
     <form id="authForm">
-        <label for="location_id">📍 Company ID</label>
+        <label for="location_id">
+          📍 Company ID 
+          <span class="info-icon">ℹ️
+            <div class="info-popup">
+              <img src="https://storage.cloud.google.com/rev-other-images/ECC%20-%20QB%20Company%20ID%20location.png" alt="Company ID Info" style="width:1000px;">
+            </div>
+          </span>
+        </label>
         <input type="text" id="location_id" name="location_id" placeholder="Enter Location ID" required>
 
         <label for="code">🔑 Enter the Code</label>
