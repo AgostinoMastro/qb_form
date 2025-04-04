@@ -1,151 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Authentication QB</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        h2 {
-            margin-bottom: 20px;
-            color: #4a4a4a;
-            font-size: 22px;
-        }
-        label {
-            display: block;
-            text-align: left;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        input {
-            width: 85%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: 0.3s;
-            outline: none;
-          margin-bottom:25px
-         
-        }
-        input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
-        }
-        .auth-button {
-            display: inline-block;
-            margin: 15px 0;
-            padding: 12px 15px;
-            background: #2CA01C;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-        .auth-button:hover {
-            background: #4a4a4a;
-        }
-        button {
-            background: #000000;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            width: 100%;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #4a4a4a;
-            color: white;
-        }
-        .message {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #28a745;
-            display: none;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .info-icon {
-          position: relative;
-          display: inline-block;
-          cursor: pointer;
-          margin-left: 5px;
-        }
-        
-        /* Center the popup on screen */
-        .info-popup {
-          display: none;
-          position: fixed; /* so it’s pinned to the viewport */
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 1000px;
-          border: 1px solid #ddd;
-          background: #fff;
-          padding: 10px;
-          z-index: 9999;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Show the popup on hover. Also allow staying open when hovering the popup itself. */
-        .info-icon:hover .info-popup,
-        .info-popup:hover {
-          display: block;
-        }
-
-
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manual Authentication QB</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #4a4a4a;
+      font-size: 22px;
+    }
+    .auth-button {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 12px 15px;
+      background: #2CA01C;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .auth-button:hover {
+      background: #4a4a4a;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .info-icon {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .info-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1000px;
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 10px;
+      z-index: 9999;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .info-icon:hover .info-popup,
+    .info-popup:hover {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-  <img src="https://storage.googleapis.com/rev-logo-files/eagle%20crest%20logo.png" alt="Eagle Crest Logo" style="height: 50px;">
-  <span style="margin: 0 10px; font-size: 24px;">&lt;&gt;</span>
-  <img src="https://storage.googleapis.com/rev-logo-files/quickbooks-2.svg" alt="QuickBooks Logo" style="height: 50px;">
-</div>
-<hr>
-  <h2>ECC to QB Authentication</h2>
-    
-        <!-- Styled Authentication Button -->
-        <a class="auth-button" href="https://appcenter.intuit.com/connect/oauth2/companyselection?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20openid%20email%20profile&redirect_uri=https://hook.us1.make.com/slauvmmsnj78cmgya8gv21vg1n6dc1uh&state=7bbfadd6-c449-4de1-9133-614932134029" target="_blank">
-            🔗 Authenticate with QuickBooks
-        </a>
+  <div class="container">
+    <!-- Logos and Heading -->
+    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+      <img src="https://storage.googleapis.com/rev-logo-files/eagle%20crest%20logo.png" alt="Eagle Crest Logo" style="height: 50px;">
+      <span style="margin: 0 10px; font-size: 24px;">&lt;&gt;</span>
+      <img src="https://storage.googleapis.com/rev-logo-files/quickbooks-2.svg" alt="QuickBooks Logo" style="height: 50px;">
+    </div>
+    <hr>
+    <h2>ECC to QB Authentication</h2>
 
-</div>
+    <!-- Correct Auth Button -->
+    <a
+      class="auth-button"
+      href="https://appcenter.intuit.com/connect/oauth2?client_id=ABvNmaRdACeX4a7mAuMTh4ENlWyEfYW9GGF3D9eb3qdM7QjcTh&response_type=code&scope=com.intuit.quickbooks.accounting%20openid%20email%20profile&redirect_uri=https://hook.us1.make.com/slauvmmsnj78cmgya8gv21vg1n6dc1uh&state=7bbfadd6-c449-4de1-9133-614932134029"
+      target="_blank"
+    >
+      🔗 Authenticate with QuickBooks
+    </a>
+
+  </div>
 
 </body>
 </html>
